@@ -1,4 +1,4 @@
-# Usar una imagen base oficial de Rust
+# Usar la imagen oficial de Rust
 FROM rust:latest
 
 # Instalar dependencias necesarias
@@ -12,11 +12,7 @@ RUN apt-get update && apt-get install -y \
     npm && \
     apt-get clean
 
-# Instalar la última versión estable de Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
-
-# Instalar Solana CLI (especificando la versión más reciente estable)
+# Instalar Solana CLI
 RUN curl -sSfL https://release.anza.xyz/v1.16.11/solana-install-init-x86_64-unknown-linux-gnu | sh
 ENV PATH="/root/.local/share/solana/install/active_release/bin:${PATH}"
 
@@ -26,11 +22,15 @@ RUN cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked
 # Crear directorio de trabajo
 WORKDIR /project
 
-# Copiar el contenido del proyecto al contenedor
+# Copiar todo el proyecto y el script dinámico
 COPY . /project
 
-# Compilar el proyecto
+# Configurar el cluster dinámicamente antes de compilar
+RUN chmod +x set_cluster.sh
+RUN ./set_cluster.sh
+
+# Construir el proyecto
 RUN anchor build
 
-# Establecer el entrypoint para el contenedor
+# Establecer el entrypoint por defecto
 ENTRYPOINT [ "/bin/bash" ]

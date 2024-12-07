@@ -4,7 +4,7 @@ use anchor_spl::token::{self, Token, TokenAccount, Transfer, Mint};
 use solana_program::program::invoke;
 use solana_program::pubkey::Pubkey;
 
-// Declare your program's ID.
+// Program ID is dynamically updated before deployment
 declare_id!("Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ");
 
 #[program]
@@ -23,12 +23,10 @@ pub mod raydium_swap_example {
         let user_wallet = ctx.accounts.user_wallet.key();
 
         // Build Raydium swap instruction (placeholder for actual implementation)
-        // Note: Replace this section with actual logic or SDK usage to create the swap instruction.
-        // Example: let swap_instruction = create_swap_instruction(...);
         let swap_instruction = solana_program::instruction::Instruction {
             program_id: ctx.accounts.raydium_program.key(),
-            accounts: vec![], // Add the appropriate accounts here
-            data: vec![],     // Add the appropriate data here
+            accounts: vec![],
+            data: vec![],
         };
 
         // Invoke Raydium swap

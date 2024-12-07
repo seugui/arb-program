@@ -1,12 +1,15 @@
-[programs.localnet]
+[programs.devnet]
 raydium_swap_example = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ"
+
+[programs.mainnet]
+raydium_swap_example = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ"
+
+[provider]
+cluster = "devnet" # Esto se sobrescribirá dinámicamente
+wallet = "/root/.config/solana/id.json"
 
 [registry]
 url = "https://anchor.projectserum.com"
-
-[provider]
-cluster = "localnet"
-wallet = "/root/.config/solana/id.json"
 
 [scripts]
 deploy = "anchor build && anchor deploy"
