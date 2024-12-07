@@ -1,0 +1,12 @@
+[programs.localnet]
+raydium_swap_example = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "/root/.config/solana/id.json"
+
+[scripts]
+deploy = "anchor build && anchor deploy"
