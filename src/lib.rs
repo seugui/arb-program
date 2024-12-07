@@ -1,93 +1,33 @@
 #![allow(unused_imports)]
 use anchor_lang::prelude::*;
-use anchor_spl::token::{self, Token, TokenAccount, Transfer, Mint};
-use solana_program::program::invoke;
-use solana_program::pubkey::Pubkey;
+use anchor_spl::token::{self, Token, TokenAccount};
+use crate::dex::raydium; // Importa el submódulo Raydium
 
-// Program ID is dynamically updated before deployment
+// Declaración del ID del programa
 declare_id!("Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ");
 
 #[program]
-pub mod raydium_swap_example {
+pub mod dex_swap_example {
     use super::*;
 
-    pub fn swap(ctx: Context<Swap>, amount_in: u64) -> Result<()> {
-        let amm_id = ctx.accounts.amm_id.key();
-        let amm_authority = ctx.accounts.amm_authority.key();
-        let pool_coin_token_account = ctx.accounts.pool_coin_token_account.key();
-        let pool_pc_token_account = ctx.accounts.pool_pc_token_account.key();
-        let serum_program_id = ctx.accounts.serum_program_id.key();
-        let serum_market = ctx.accounts.serum_market.key();
-        let user_source_token_account = ctx.accounts.user_source_token_account.key();
-        let user_destination_token_account = ctx.accounts.user_destination_token_account.key();
-        let user_wallet = ctx.accounts.user_wallet.key();
-
-        // Build Raydium swap instruction (placeholder for actual implementation)
-        let swap_instruction = solana_program::instruction::Instruction {
-            program_id: ctx.accounts.raydium_program.key(),
-            accounts: vec![],
-            data: vec![],
-        };
-
-        // Invoke Raydium swap
-        invoke(
-            &swap_instruction,
-            &[
-                ctx.accounts.amm_id.to_account_info(),
-                ctx.accounts.amm_authority.to_account_info(),
-                ctx.accounts.amm_open_orders.to_account_info(),
-                ctx.accounts.amm_target_orders.to_account_info(),
-                ctx.accounts.pool_coin_token_account.to_account_info(),
-                ctx.accounts.pool_pc_token_account.to_account_info(),
-                ctx.accounts.serum_program_id.to_account_info(),
-                ctx.accounts.serum_market.to_account_info(),
-                ctx.accounts.serum_bids.to_account_info(),
-                ctx.accounts.serum_asks.to_account_info(),
-                ctx.accounts.serum_event_queue.to_account_info(),
-                ctx.accounts.serum_coin_vault_account.to_account_info(),
-                ctx.accounts.serum_pc_vault_account.to_account_info(),
-                ctx.accounts.serum_vault_signer.to_account_info(),
-                ctx.accounts.user_source_token_account.to_account_info(),
-                ctx.accounts.user_destination_token_account.to_account_info(),
-                ctx.accounts.user_wallet.to_account_info(),
-                ctx.accounts.token_program.to_account_info(),
-            ],
-        )?;
-
-        Ok(())
+    pub fn swap(ctx: Context<Swap>, dex_name: String, amount_in: u64) -> Result<()> {
+        match dex_name.as_str() {
+            "raydium" => raydium::handle_swap(ctx, amount_in),
+            _ => Err(ErrorCode::DexNotSupported.into()),
+        }
     }
 }
 
 #[derive(Accounts)]
 pub struct Swap<'info> {
-    /// CHECK: This is safe because we are reading the account only
+    /// CHECK: Se valida en tiempo de ejecución
     pub amm_id: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
+    /// CHECK: Se valida en tiempo de ejecución
     pub amm_authority: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub amm_open_orders: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub amm_target_orders: AccountInfo<'info>,
     #[account(mut)]
     pub pool_coin_token_account: Account<'info, TokenAccount>,
     #[account(mut)]
     pub pool_pc_token_account: Account<'info, TokenAccount>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_program_id: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_market: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_bids: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_asks: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_event_queue: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_coin_vault_account: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_pc_vault_account: AccountInfo<'info>,
-    /// CHECK: This is safe because we are reading the account only
-    pub serum_vault_signer: AccountInfo<'info>,
     #[account(mut)]
     pub user_source_token_account: Account<'info, TokenAccount>,
     #[account(mut)]
@@ -95,6 +35,10 @@ pub struct Swap<'info> {
     #[account(signer)]
     pub user_wallet: AccountInfo<'info>,
     pub token_program: Program<'info, Token>,
-    /// CHECK: This is safe because we are reading the account only
-    pub raydium_program: AccountInfo<'info>,
+}
+
+#[error_code]
+pub enum ErrorCode {
+    #[msg("The specified DEX is not supported.")]
+    DexNotSupported,
 }

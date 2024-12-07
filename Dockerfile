@@ -1,8 +1,8 @@
-# Usar la imagen oficial de Rust
+# Usar la imagen oficial de Rust como base
 FROM rust:latest
 
-# Instalar dependencias necesarias
-RUN apt-get update && apt-get install -y \
+# Instalar dependencias necesarias para Solana, Anchor y pruebas
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libudev-dev \
     pkg-config \
     build-essential \
@@ -10,14 +10,12 @@ RUN apt-get update && apt-get install -y \
     git \
     nodejs \
     npm && \
-    apt-get clean
+    curl -sSfL https://release.anza.xyz/v1.16.11/solana-install-init-x86_64-unknown-linux-gnu | sh && \
+    cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Instalar Solana CLI
-RUN curl -sSfL https://release.anza.xyz/v1.16.11/solana-install-init-x86_64-unknown-linux-gnu | sh
+# Establecer el PATH para Solana CLI
 ENV PATH="/root/.local/share/solana/install/active_release/bin:${PATH}"
-
-# Instalar Anchor CLI
-RUN cargo install --git https://github.com/coral-xyz/anchor anchor-cli --locked
 
 # Crear directorio de trabajo
 WORKDIR /project
@@ -25,12 +23,11 @@ WORKDIR /project
 # Copiar todo el proyecto y el script dinámico
 COPY . /project
 
-# Configurar el cluster dinámicamente antes de compilar
-RUN chmod +x set_cluster.sh
-RUN ./set_cluster.sh
+# Instalar dependencias para pruebas
+RUN npm install --save-dev @project-serum/anchor
 
-# Construir el proyecto
-RUN anchor build
+# Dar permisos al script dinámico
+RUN chmod +x set_cluster.sh
 
 # Establecer el entrypoint por defecto
 ENTRYPOINT [ "/bin/bash" ]
