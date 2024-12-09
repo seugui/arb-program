@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use crate::dex::raydium;
 
-declare_id!("Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ");
+declare_id!("F8X37sR1tb3cw8VF2W29MEXyAMLJxLYr47tAn33HcNf8");
 
 #[program]
 pub mod dex_swap_example {
@@ -38,3 +38,4 @@ pub struct Swap<'info> {
 pub enum ErrorCode {
     #[msg("El DEX especificado no está soportado.")]
     DexNotSupported,
+}
