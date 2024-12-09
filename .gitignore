@@ -1,0 +1,42 @@
+# Archivos de claves privadas
+*.json
+*.key
+
+# Archivos de compilación de Rust
+/target
+**/*.rs.bk
+
+# Archivos generados por Anchor
+/target/deploy/*.json
+/target/deploy/*.so
+/target/deploy/*.idl
+/target/types
+
+# Archivos y carpetas específicas del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de Node.js
+/node_modules
+/package-lock.json
+
+# Archivos de pruebas generados
+/tests/*.log
+
+# Configuración local de Solana
+/.config/solana/id.json
+
+# Archivos temporales y caché
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Archivos de configuración del editor
+.idea/
+.vscode/
+*.iml
+
+# Otros archivos innecesarios
+*.lock
+*.env
