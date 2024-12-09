@@ -1,17 +1,15 @@
 use anchor_lang::prelude::*;
+use anchor_spl::token::{TokenAccount, Token};
 use crate::dex::raydium;
 
-declare_id!("F8X37sR1tb3cw8VF2W29MEXyAMLJxLYr47tAn33HcNf8");
+declare_id!("8QZSmYMQZUscLBXWczUBBkzLKWzLQZ2S5f8Tg1L1N6bH");
 
 #[program]
-pub mod dex_swap_example {
+pub mod arb_program {
     use super::*;
 
-    pub fn swap(ctx: Context<Swap>, dex_name: String, amount_in: u64) -> Result<()> {
-        match dex_name.as_str() {
-            "raydium" => raydium::handle_swap(ctx, amount_in),
-            _ => Err(ErrorCode::DexNotSupported.into()),
-        }
+    pub fn swap(ctx: Context<Swap>, amount_in: u64) -> Result<()> {
+        raydium::handle_swap(ctx, amount_in)
     }
 }
 
@@ -32,10 +30,4 @@ pub struct Swap<'info> {
     #[account(signer)]
     pub user_wallet: AccountInfo<'info>,
     pub token_program: Program<'info, Token>,
-}
-
-#[error_code]
-pub enum ErrorCode {
-    #[msg("El DEX especificado no está soportado.")]
-    DexNotSupported,
 }
