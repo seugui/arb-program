@@ -1,8 +1,8 @@
 [programs.devnet]
-arb_program = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ" # Program ID en Devnet
+arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc" # Program ID en Devnet
 
 [programs.mainnet]
-arb_program = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ" # Program ID en Mainnet
+raydium_swap_example = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc" # Program ID en Mainnet
 
 [provider]
 cluster = "https://api.devnet.solana.com" # Cambia a Mainnet cuando sea necesario
@@ -17,7 +17,7 @@ test = "anchor test --skip-local-validator" # Pruebas sin usar el validador loca
 
 [workspace]
 members = [
-  "programs/raydium_swap_example"
+  "programs/arb_program"
 ]
 
 [features]
