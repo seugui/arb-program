@@ -1,9 +1,10 @@
+#![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 use anchor_spl::token::{TokenAccount, Token};
 
 mod dex; // Registra el folder dex como un módulo
 
-declare_id!("kFNfD6Yet3usnGs2fTzDtUjN4AJkHGELXD4Q3hQ6HK4");
+declare_id!("9oBEFTReQd8LrHtMVigGqnA9GSXJujPFp3PhVnNfLTzw");
 
 #[program]
 pub mod arb_program {
