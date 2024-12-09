@@ -2,6 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{TokenAccount, Token};
 use solana_program::instruction::Instruction;
 use solana_program::program::invoke;
+use crate::Swap;
 
 pub fn handle_swap(ctx: Context<Swap>, amount_in: u64) -> Result<()> {
     let swap_instruction = Instruction {

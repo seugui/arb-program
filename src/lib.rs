@@ -1,9 +1,6 @@
-#![allow(unused_imports)]
 use anchor_lang::prelude::*;
-use anchor_spl::token::{self, Token, TokenAccount};
-use crate::dex::raydium; // Importa el submódulo Raydium
+use crate::dex::raydium;
 
-// Declaración del ID del programa
 declare_id!("Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ");
 
 #[program]
@@ -20,9 +17,9 @@ pub mod dex_swap_example {
 
 #[derive(Accounts)]
 pub struct Swap<'info> {
-    /// CHECK: Se valida en tiempo de ejecución
+    /// CHECK: Validación en tiempo de ejecución
     pub amm_id: AccountInfo<'info>,
-    /// CHECK: Se valida en tiempo de ejecución
+    /// CHECK: Validación en tiempo de ejecución
     pub amm_authority: AccountInfo<'info>,
     #[account(mut)]
     pub pool_coin_token_account: Account<'info, TokenAccount>,
@@ -39,6 +36,6 @@ pub struct Swap<'info> {
 
 #[error_code]
 pub enum ErrorCode {
-    #[msg("The specified DEX is not supported.")]
+    #[msg("El DEX especificado no está soportado.")]
     DexNotSupported,
 }
