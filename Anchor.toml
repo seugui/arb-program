@@ -1,11 +1,11 @@
 [programs.devnet]
-raydium_swap_example = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ"
+arb_program = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ" # Program ID en Devnet
 
 [programs.mainnet]
-raydium_swap_example = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ"
+arb_program = "Fq217QUgpVEeaAnptT4rrpLc4oZ51hgbWTTxHW1DRyEJ" # Program ID en Mainnet
 
 [provider]
-cluster = "https://api.devnet.solana.com"
+cluster = "https://api.devnet.solana.com" # Cambia a Mainnet cuando sea necesario
 wallet = "~/.config/solana/id.json"
 
 [registry]
@@ -13,3 +13,13 @@ url = "https://anchor.projectserum.com"
 
 [scripts]
 deploy = "anchor build && anchor deploy"
+test = "anchor test --skip-local-validator" # Pruebas sin usar el validador local
+
+[workspace]
+members = [
+  "programs/raydium_swap_example"
+]
+
+[features]
+devnet = []
+mainnet = []
