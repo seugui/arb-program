@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{TokenAccount, Token};
 use crate::dex::raydium;
 
-declare_id!("8QZSmYMQZUscLBXWczUBBkzLKWzLQZ2S5f8Tg1L1N6bH");
+declare_id!("Rw9S416EA9rc6CA8UGazHSg4XZW3FvyoUE58akafcT9");
 
 #[program]
 pub mod arb_program {
