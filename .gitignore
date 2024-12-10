@@ -25,6 +25,7 @@ Thumbs.db
 
 # Configuración local de Solana
 /.config/solana/id.json
+/test-ledger
 
 # Archivos temporales y caché
 *.log
