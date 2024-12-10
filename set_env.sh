@@ -2,7 +2,7 @@
 
 if [[ "$1" == "localnet" ]]; then
   sed -i '' 's|cluster = .*|cluster = "localnet"|' Anchor.toml
-  solana config set --url http://127.0.0.1:8900
+  solana config set --url http://127.0.0.1:8898
   echo "Switched to Localnet"
 
 elif [[ "$1" == "devnet" ]]; then

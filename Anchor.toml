@@ -1,14 +1,14 @@
 [programs.localnet]
-arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc"
+arb_program = "AF5rgAiHHSQWctDDuesV8q3fRYBUgj8ZLKYqg8dkSNmR"
 
 [programs.devnet]
-arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc"
+arb_program = "AF5rgAiHHSQWctDDuesV8q3fRYBUgj8ZLKYqg8dkSNmR"
 
 [programs.mainnet]
-arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc"
+arb_program = "AF5rgAiHHSQWctDDuesV8q3fRYBUgj8ZLKYqg8dkSNmR"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [registry]

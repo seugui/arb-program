@@ -4,7 +4,7 @@ use anchor_spl::token::{TokenAccount, Token};
 
 mod dex; // Registra el folder dex como un módulo
 
-declare_id!("3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc");
+declare_id!("AF5rgAiHHSQWctDDuesV8q3fRYBUgj8ZLKYqg8dkSNmR");
 
 #[program]
 pub mod arb_program {
