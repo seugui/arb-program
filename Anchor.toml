@@ -1,14 +1,14 @@
+[programs.localnet]
+arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc"
+
 [programs.devnet]
-arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc" # Program ID en Devnet
+arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc"
 
 [programs.mainnet]
-arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc" # Program ID en Mainnet
-
-[programs.localtest]
-arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc" # Program ID en entorno local
+arb_program = "3XaaffPKycGUe2yc5EC2yGwyFugDUWH6FY9X97YuG5Xc"
 
 [provider]
-cluster = "http://127.0.0.1:8899"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [registry]
@@ -16,8 +16,7 @@ url = "https://anchor.projectserum.com"
 
 [scripts]
 deploy = "anchor build && anchor deploy"
-test = "anchor test --skip-local-validator" # Pruebas sin usar el validador local
-localtest = "solana-test-validator --reset && anchor build && anchor deploy --provider.cluster http://127.0.0.1:8899 && anchor test" # Script para pruebas locales
+test = "anchor test --skip-local-validator"
 
 [workspace]
 members = [
@@ -25,6 +24,6 @@ members = [
 ]
 
 [features]
+localnet = []
 devnet = []
 mainnet = []
-localtest = []
