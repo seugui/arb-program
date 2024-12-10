@@ -1,11 +1,11 @@
 [programs.localnet]
-arb_program = "AF5rgAiHHSQWctDDuesV8q3fRYBUgj8ZLKYqg8dkSNmR"
+arb_program = "HNAngymtnSd9LjFcovm8eiTcsbGBdbGHNoATc4RmNr5f"
 
 [programs.devnet]
-arb_program = "AF5rgAiHHSQWctDDuesV8q3fRYBUgj8ZLKYqg8dkSNmR"
+arb_program = "HNAngymtnSd9LjFcovm8eiTcsbGBdbGHNoATc4RmNr5f"
 
 [programs.mainnet]
-arb_program = "AF5rgAiHHSQWctDDuesV8q3fRYBUgj8ZLKYqg8dkSNmR"
+arb_program = "HNAngymtnSd9LjFcovm8eiTcsbGBdbGHNoATc4RmNr5f"
 
 [provider]
 cluster = "devnet"
